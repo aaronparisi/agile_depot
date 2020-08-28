@@ -9,7 +9,10 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class='<%= controller.controller_name %>'>
+  <%# notice that all the styles in products.scss are nested under
+      .products {...}; if we do our other stylesheets this way,
+      none of them will have any of products.scss' styles applied??  %>
     <%= yield %>
   </body>
 </html>
