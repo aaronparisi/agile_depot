@@ -22,3 +22,10 @@ two:
   description: MyText
   image_url: lorem.png
   price: 9.99
+
+lotr:
+  title: Lord of the Rings, The Two Towers
+  description:
+    The second, and by far the best, film in JRR Tolkien's epic series
+  price: 19.99
+  image_url: 2towers.jpg

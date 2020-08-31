@@ -16,6 +16,9 @@ class ProductTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+
+  fixtures :products
+
   test "product attributes must not be empty" do
     product = Product.new
     assert product.invalid?
@@ -64,5 +67,21 @@ class ProductTest < ActiveSupport::TestCase
     notok.each do |url|
       assert new_product(url).invalid?, "#{url} shouldn't be valid"
     end      
+  end
+
+  test "product is not valid without a unique title" do
+    # notice that the info in test/fixtures/products.yml 
+    # is in the db as of the start of this (and all) tests
+    title_thief = Product.new(
+      title:       products(:ruby).title,
+      # steals the title => product should be invalid
+      description: "yyy",
+      price:       1,
+      image_url:   "2towers.jpg"
+    )
+
+    assert title_thief.invalid?, "#{title_thief.title} should be a repeat"
+    assert_equal ["has already been taken"], product.errors[:title]
+    # ensure we actually get the error we expect on the title attribute
   end
 end
