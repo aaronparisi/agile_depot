@@ -91,6 +91,13 @@ class ProductTest < ActiveSupport::TestCase
       price: 1,
       image_url: "fake.jpg"
     )
+    # notice that image_url doesn't create an issue even though
+    # there is no file "fake.jpg" in app/images
+    # this is because when we run rails test:models,
+    # we are NOT running the integration tests which were
+    # throwing the error on the image_url's in products.yml
+    # product_test.rb ONLY TESTS whether url's have the correct extension,
+    # not whether the asset exists
 
     product.title = "too short"
     assert product.invalid?, "#{product.title} should be too short" 
