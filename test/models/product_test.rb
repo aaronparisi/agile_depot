@@ -73,7 +73,7 @@ class ProductTest < ActiveSupport::TestCase
     # notice that the info in test/fixtures/products.yml 
     # is in the db as of the start of this (and all) tests
     title_thief = Product.new(
-      title:       products(:ruby).title,
+      title:       products(:lotr).title,
       # steals the title => product should be invalid
       description: "yyy",
       price:       1,
@@ -81,7 +81,25 @@ class ProductTest < ActiveSupport::TestCase
     )
 
     assert title_thief.invalid?, "#{title_thief.title} should be a repeat"
-    assert_equal ["has already been taken"], product.errors[:title]
+    assert_equal ["has already been taken"], title_thief.errors[:title]
     # ensure we actually get the error we expect on the title attribute
+  end
+
+  test "title is at least 10 characters" do
+    product = Product.new(
+      description: "yyy",
+      price: 1,
+      image_url: "fake.jpg"
+    )
+
+    product.title = "too short"
+    assert product.invalid?, "#{product.title} should be too short" 
+    assert_equal ["is too short (minimum is 10 characters)"], product.errors[:title]
+
+    product.title = "0123456789"
+    assert product.valid?, "#{product.title} should be exactly 10 characters"
+
+    product.title = "this is wayyyyyyyyyy longer than 10 characters"
+    assert product.valid?, "#{product.title} should be longer than 10 chars"
   end
 end
