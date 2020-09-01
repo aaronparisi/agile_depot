@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'store/index'
+  # get 'store/index' replaced by root
   resources :products
 
   root 'store#index', as: 'store_index'
