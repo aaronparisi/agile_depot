@@ -23,3 +23,8 @@ products change%>
     <% end %>
   <% end %>
 <% end %>
+
+<%# "whenever the specified data changes, the section will be rerendered"
+    i.e. whenever the data specified in the cache method call (eg. cache @products do)
+    changes (i.e. whenever anything in the entire set of products changes),
+    then we will rerender the html within the enclosed do...end block %>

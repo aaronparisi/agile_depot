@@ -21,6 +21,11 @@
     <div id="columns">
 
       <div id="side">
+        <% t = Time.now %>
+        <div id="time_display">
+        </div>
+          <%= t.strftime("Today is %A, %B %d, %Y") %><br>
+          <%= t.strftime("The time is %I:%M") %>
         <ul>
           <li><a href="http://www....">Home</a></li>
           <li><a href="http://www....">Questions</a></li>
@@ -31,7 +36,7 @@
       <div id="main">
         <%= yield %>
       </div>
-      
+
     </div>
     
   </body>
