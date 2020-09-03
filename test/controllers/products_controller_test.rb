@@ -14,6 +14,22 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get products_url
     assert_response :success
+
+    assert_select 'h1', 'Products'
+    # 
+    assert_select '.list_actions a', products.count*3
+    # 3 for each product in the test yaml file
+    assert_select 'img', products.count+1
+    # this uses the data from products.yml
+    # but selects from the html rendered when a request is made to
+    # the products controller's index action,
+    # which will render the html from application.html.erb layout
+    assert_select '.list_description dt', products.count
+    assert_select '.list_description dd', products.count
+
+    assert_select 'table', 1
+
+    assert_select '.list_description dd', /^[a-zA-Z]{,80}$/
   end
 
   test "should get new" do
