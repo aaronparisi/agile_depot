@@ -2,13 +2,24 @@
 
 <%# <h1>Your Pragmatic Catalog</h1> %>
 
-<% @products.each do |product| %>
-  <div class="entry">
-    <%= image_tag product.image_url %>
-    <h3><%= product.title %></h3>
-    <%= sanitize(product.description) %>
-    <div class="price_line">
-      <span class="price"><%= number_to_currency(product.price) %></span>
-    </div>
-  </div>
+<% cache @products do %>
+<%# this caches the view partial (not separated out into a separate _products.html.erb file)
+in its entirety; the content between this do...end will be re-rendered whenever any of the
+products change%>
+  <% @products.each do |product| %>
+    <% cache product do%>
+    <%# this caches the partial (analogous to _product.html.erb) for each individual product 
+    as we are re-rendering the entire group of products, we will check if each product,
+    displayed according to what is within this sub do...end, needs to be re-rendered
+    itself, or if it can be simply grabbed from the cache%>
+      <div class="entry">
+        <%= image_tag product.image_url %>
+        <h3><%= product.title %></h3>
+        <%= sanitize(product.description) %>
+        <div class="price_line">
+          <span class="price"><%= number_to_currency(product.price) %></span>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 <% end %>
