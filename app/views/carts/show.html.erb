@@ -4,11 +4,14 @@
 
 
 <ul>
-  <% @products.each do |product| %>
-      <li><%= product.title %></li>
+  
+  <% @line_items.each do |item| %>
+    <li><%= item.quantity %> &times; <%= item.product.title %></li>
   <% end %>
+  
 </ul>
 
 
 <%= link_to 'Edit', edit_cart_path(@cart) %> |
+<%# link_to 'Empty Cart', empty_cart_path(@cart) %>
 <%= link_to 'Store', store_index_path %>

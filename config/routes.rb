@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :line_items
-  resources :carts
+  resources :carts #do
+  #   delete :empty, on: :member
+  # end
   # get 'store/index' replaced by root
   resources :products
 

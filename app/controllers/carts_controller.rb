@@ -10,7 +10,7 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.json
   def show
-    @products = @cart.products
+    @line_items = @cart.line_items    
   end
 
   # GET /carts/new
@@ -51,6 +51,11 @@ class CartsController < ApplicationController
       end
     end
   end
+
+  # def empty
+  #   @
+  # end
+  
 
   # DELETE /carts/1
   # DELETE /carts/1.json
