@@ -15,3 +15,16 @@ module CurrentCart
   end
   
 end
+
+# questions I'm having at this point:
+
+# 1. how does a private module method get called?  My understanding is that private
+# methods can only be called by an instance of the class who defines them,
+# but a module can't be instantiated, so who calls the method?
+# I'm guessing some class 'extends' the module or something?
+
+# 2. we are about to generate a scaffold for a line item in the cart,
+# which would link together a product and a cart.  the book says 
+# product:references and cart:belongs_to
+# i.e. a line item references a product and belongs_to a cart
+# What's the difference between references and belongs_to?
