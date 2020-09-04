@@ -20,6 +20,22 @@ class Product < ApplicationRecord
     message: 'must be a URL for GIF, JPG, or PNG image.'
   }
 
+  has_many :line_items
+  has_many :carts, through: :line_items
+
+  before_destroy :ensure_not_ref_by_line_items
+
+  private
+
+  def ensure_not_ref_by_line_items
+    unless line_items.empty?
+      # this is self.line_items, not the entire table
+      errors.add(:base, 'Line Items present')
+      throw :abort
+      # I think this will yield the "rails aborted" line in the terminal?
+    end
+  end
+  
 end
 
 # ? why can I create new products in the rails console with negative prices?
