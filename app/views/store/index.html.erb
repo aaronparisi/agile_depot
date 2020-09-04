@@ -25,7 +25,10 @@ products change%>
   <% end %>
 <% end %>
 
-<p id="visit_count">You have visited this page <%= pluralize(@visit_count, "time") %></p>
+
+<% if @visit_count > 5 %>
+  <p id="visit_count">You have visited this page <%= pluralize(@visit_count, "time") %></p>
+<% end %>
 
 <%# "whenever the specified data changes, the section will be rerendered"
     i.e. whenever the data specified in the cache method call (eg. cache @products do)
