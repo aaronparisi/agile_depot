@@ -3,11 +3,11 @@ class StoreController < ApplicationController
     @products = Product.order(:title)
     @page_title = "Your Pragmatic Catalog"
     
-    if session[:counter].nil?
-      session[:counter] = 1
+    if session[:visit_count].nil?
+      session[:visit_count] = 1
     else
-      session[:counter] += 1
+      session[:visit_count] += 1
     end
-    @visit_count = session[:counter]
+    @visit_count = session[:visit_count]
   end
 end

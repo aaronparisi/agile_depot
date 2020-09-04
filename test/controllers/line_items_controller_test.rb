@@ -23,6 +23,8 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
       # given only the id of the product
     end
 
+    assert_equal session[:visit_count], 0
+
     follow_redirect!
 
     # assert_redirected_to line_item_url(LineItem.last)
