@@ -4,7 +4,7 @@ class StoreController < ApplicationController
     @page_title = "Your Pragmatic Catalog"
     
     if session[:visit_count].nil?
-      session[:visit_counto] = 1
+      session[:visit_count] = 1
     else
       session[:visit_count] += 1
     end
