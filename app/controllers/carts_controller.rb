@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   # GET /carts
   # GET /carts.json
@@ -77,4 +78,23 @@ class CartsController < ApplicationController
     def cart_params
       params.fetch(:cart, {})
     end
+
+    def invalid_cart
+      logger.error "Attempt to access invalid cart #{params[:id]}"
+      # redirect_to store_index_url, notice: 'Invalid cart'
+      puts "before render"
+      @products = Product.order(:title)
+      @visit_count = session[:visit_count]
+      render 'store/index'
+      puts "after render"
+      # one thought is to simply render the index view,
+      # which would result in the same content displayed to the user
+      # 1. however this would leave the url untouched, i.e. localhost:3000/some_invalid_cart_id
+      # thus exposing the invalid cart id to the user
+      # 2. the other problem is that if we go right to the store index view,
+      # we aren't providing the products in an instance variable,
+      # and so the view template doesn't know what to render
+      # 3. this would also 
+    end
+    
 end
