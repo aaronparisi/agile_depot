@@ -85,6 +85,7 @@ class CartsController < ApplicationController
       puts "before render"
       @products = Product.order(:title)
       @visit_count = session[:visit_count]
+      @controller_class = 'store'
       render 'store/index'
       puts "after render"
       # one thought is to simply render the index view,
