@@ -11,6 +11,12 @@ class Cart < ApplicationRecord
   has_many :products, through: :line_items
 
   def add_product(product_id)
+    # NOTE: self (a cart instance) is not set by CartController#set_cart
+    # it is set by CurrentCart's set_cart method,
+    # which is included in line_item's controller
+    # and called before LineItemsController's create method
+    # IF no product has been added, or IF the cart has been emptied,
+    # CurrentCart's set_cart method will CREATE a new cart_id in the session
     current_item = line_items.find_by(product_id: product_id)
     if current_item
       current_item.quantity += 1

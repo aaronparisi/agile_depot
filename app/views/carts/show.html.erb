@@ -11,7 +11,8 @@
   
 </ul>
 
+<%= button_to 'Empty Cart', @cart, method: :delete, data: {confirm: 'Are you sure?'}%>
 
 <%= link_to 'Edit', edit_cart_path(@cart) %> |
-<%# link_to 'Empty Cart', empty_cart_path(@cart) %>
 <%= link_to 'Store', store_index_path %>
+

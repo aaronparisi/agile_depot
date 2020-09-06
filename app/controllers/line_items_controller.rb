@@ -1,6 +1,6 @@
 class LineItemsController < ApplicationController
   include CurrentCart #paste the module code in this class
-  before_action :set_cart, only: :create # create has access to @cart var
+  before_action :set_cart, only: :create # give create access to @cart var
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 
   # GET /line_items
@@ -28,11 +28,13 @@ class LineItemsController < ApplicationController
   def create
     @line_item = @cart.add_product(params[:product_id])
     # notice that we are calling a method on a Cart instance
+    # and @cart is derived from the session
 
     respond_to do |format|
       if @line_item.save
         session[:visit_count] = 0
         format.html { redirect_to @line_item.cart, notice: 'Line item was successfully created.' }
+        # presumably, redirecting in this way puts the cart's id in params??
         format.json { render :show, status: :created, location: @line_item }
       else
         format.html { render :new }

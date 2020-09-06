@@ -11,6 +11,8 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.json
   def show
+    # notice here that @cart is set via set_cart, which gets the cart
+    # via the cart_id variable in PARAMS, not the session
     @line_items = @cart.line_items    
   end
 
@@ -61,9 +63,21 @@ class CartsController < ApplicationController
   # DELETE /carts/1
   # DELETE /carts/1.json
   def destroy
-    @cart.destroy
+    # views/carts/show redirects here with @cart
+    # CartsController#show is called by LineItemsController#create, with
+    # @line_item.cart, which puts the proper cart's id in params
+    # CartsController#show thus sets @cart via that value in params
+    # so the button in views/carts/show refers to THIS @cart, i.e.
+    # the one whose id matches the cart_id in the line_item created when
+    # adding an item to the cart (and that line item derived a cart from CurrentCart)
+    # ? how could someone make a delete request to cart_path with some random id,
+    # ? as opposed to the id given to the cart's show view?
+    @cart.destroy if @cart.id == session[:cart_id]
+    # ? what if they are not equal?  Do we still set the cart to nil?
+    # ? doesn't that leave a cart object in the database??
+    session[:cart_id] = nil
     respond_to do |format|
-      format.html { redirect_to carts_url, notice: 'Cart was successfully destroyed.' }
+      format.html { redirect_to store_index_url, notice: 'Cart was successfully emptied.' }
       format.json { head :no_content }
     end
   end
