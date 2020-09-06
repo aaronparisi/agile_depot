@@ -73,6 +73,11 @@ class LineItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def line_item_params
-      params.require(:line_item).permit(:product_id, :cart_id)
+      params.require(:line_item).permit(:product_id)
+      # there is no need to pass in a cart_id as a param
+      # 1. the cart_id of a line item should never be changed
+      # 2. the cart_id is accessible via the session
+      # allowing it to be passed in as a param creates the ability to pass
+      # cart_id's other than that currently contained in the session
     end
 end
