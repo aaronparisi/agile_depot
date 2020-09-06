@@ -13,7 +13,10 @@ class CartsController < ApplicationController
   def show
     # notice here that @cart is set via set_cart, which gets the cart
     # via the cart_id variable in PARAMS, not the session
-    @line_items = @cart.line_items    
+    @line_items = @cart.line_items
+    if @line_items.empty?
+      redirect_to store_index_path, notice: "Your cart is empty"
+    end
   end
 
   # GET /carts/new
