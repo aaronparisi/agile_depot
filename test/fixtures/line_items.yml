@@ -19,7 +19,9 @@
 one:
   product: two
   cart: one
+  quantity: 1
 
 two:
   product: two
   cart: two
+  quantity: 1
