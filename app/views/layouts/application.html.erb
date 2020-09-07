@@ -23,15 +23,19 @@
       <div id="side">
         <% t = Time.now %>
         <div id="time_display">
-        </div>
           <%= t.strftime("Today is %A, %B %d, %Y") %><br>
           <%= t.strftime("The time is %I:%M") %>
+        </div>
         <ul>
           <li><a href="http://www....">Home</a></li>
           <li><a href="http://www....">Questions</a></li>
           <li><a href="http://www....">News</a></li>
           <li><a href="http://www....">Contact</a></li>
         </ul>
+
+        <div id="cart">
+          <%= render @cart %>
+        </div>
       </div>
       <div id="main">
         <%= yield %>
