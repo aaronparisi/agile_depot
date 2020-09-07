@@ -30,6 +30,11 @@ class Cart < ApplicationRecord
     # that already exists
     # ? how does 'save' work in this case?
   end
+
+  def total_price
+    self.line_items.to_a.sum {|item| item.total_price}
+  end
+  
 end
 
 # comment

@@ -33,7 +33,7 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       if @line_item.save
         session[:visit_count] = 0
-        format.html { redirect_to @line_item.cart, notice: 'Line item was successfully created.' }
+        format.html { redirect_to @line_item.cart }
         # presumably, redirecting in this way puts the cart's id in params??
         format.json { render :show, status: :created, location: @line_item }
       else
