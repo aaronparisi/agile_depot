@@ -1,6 +1,6 @@
 class LineItemsController < ApplicationController
   include CurrentCart #paste the module code in this class
-  before_action :set_cart, only: :create # give create access to @cart var
+  before_action :set_cart, only: [:create, :destroy] # give create access to @cart var
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 
   # GET /line_items
@@ -62,7 +62,7 @@ class LineItemsController < ApplicationController
   def destroy
     @line_item.destroy
     respond_to do |format|
-      format.html { redirect_to line_items_url, notice: 'Line item was successfully destroyed.' }
+      format.html { redirect_to @cart, notice: 'Line item was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

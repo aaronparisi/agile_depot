@@ -9,6 +9,7 @@
       <td><%= item.quantity %> &times </td>
       <td><%= item.product.title %></td>
       <td class="item_price"><%= number_to_currency(item.total_price) %></td>
+      <td class="item_destroy_button"><%= button_to 'Remove Item', item, method: :delete, data: {confirm: "Remove \'#{item.product.title}' from cart?"}%></td>
     </tr>
   <% end %>
 

@@ -3,6 +3,7 @@ require 'test_helper'
 class LineItemsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @line_item = line_items(:one)
+    @cart = @line_item.cart
   end
 
   test "should get index" do
@@ -56,7 +57,10 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('LineItem.count', -1) do
       delete line_item_url(@line_item)
     end
-
-    assert_redirected_to line_items_url
+    
+    assert_redirected_to Cart.find(session[:cart_id])
+    # assert_redirected_to @cart
+    # rails 5 does not allow access to the session vars?
+    # how can i simulate a session when testing only the destroy action??
   end
 end
