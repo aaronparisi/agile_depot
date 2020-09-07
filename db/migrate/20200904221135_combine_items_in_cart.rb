@@ -28,21 +28,21 @@ class CombineItemsInCart < ActiveRecord::Migration[5.2]
     end
   end
 
-  def down
-    Cart.all.each do |cart|    
-      cart.line_items.each do |item|
-        if item.quantity > 1
-          quant = item.quantity
-          id = item.product_id
-          item.delete  # can I just do this or do I have to go through the cart.line_items again?
-          quant.times do 
-            new = cart.line_items.build(product_id: id)  # defaults to quantity of 1
-            new.save!
-          end
-        end
-      end
-    end
-  end
+  # def down
+  #   Cart.all.each do |cart|    
+  #     cart.line_items.each do |item|
+  #       if item.quantity > 1
+  #         quant = item.quantity
+  #         id = item.product_id
+  #         item.delete  # can I just do this or do I have to go through the cart.line_items again?
+  #         quant.times do 
+  #           new = cart.line_items.build(product_id: id)  # defaults to quantity of 1
+  #           new.save!
+  #         end
+  #       end
+  #     end
+  #   end
+  # end
 
   def down
     LineItem.where("quantity > 1").each do |item|

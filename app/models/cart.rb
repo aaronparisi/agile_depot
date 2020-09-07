@@ -21,7 +21,8 @@ class Cart < ApplicationRecord
     if current_item
       current_item.quantity += 1
     else
-      current_item = line_items.build(product_id: product_id)
+      price = Product.find(product_id: product_id).price
+      current_item = line_items.build(product_id: product_id, product_price: price)
       # I think this is saying "self.line_items"
     end
     current_item
