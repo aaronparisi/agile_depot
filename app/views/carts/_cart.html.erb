@@ -1,15 +1,13 @@
 <h2>Your Cart</h2>
 
-<table id="cart_line_items">
-  
+<div class="line_item_display">
   <%= render(@cart.line_items) %>
+</div>
 
-  <tr class="total_row">
-    <td colspan="2">Total</td>
-    <td class="total_cell"><%= number_to_currency(@cart.total_price) %></td>
-  </tr>
-  
-</table>
+<div class="total_row">
+  <div class="total_label">Total</div>
+  <div class="total_val"><%= number_to_currency(@cart.total_price) %></div>
+</div>
 
 <%= button_to 'Empty Cart', @cart, method: :delete, data: {confirm: 'Are you sure?'}%>
 

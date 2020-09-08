@@ -1,6 +1,15 @@
-  <tr>
-    <td><%= line_item.quantity %> &times </td>
-    <td><%= line_item.product.title %></td>
-    <td class="line_item_price"><%= number_to_currency(line_item.total_price) %></td>
-    <td class="line_item_destroy_button"><%= button_to 'Remove Item', line_item, method: :delete, data: {confirm: "Remove \'#{line_item.product.title}' from cart?"}%></td>
-  </tr>
+<div class="line_item_quantity">
+  <%= line_item.quantity %> &times
+</div>
+
+<div class="line_item_title">
+  <%= line_item.product.title %>
+</div>
+
+<div class="line_item_price">
+  <%= number_to_currency(line_item.total_price) %>
+</div>
+
+<div class="line_item_destroy_button">
+  <%= button_to 'Remove Item', line_item, method: :delete, data: {confirm: "Remove \'#{line_item.product.title}' from cart?"} %>
+</div>
