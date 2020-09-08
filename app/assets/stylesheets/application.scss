@@ -80,6 +80,7 @@
       .line_item_display {
         display: flex;
         justify-content: flex-end;
+        flex-wrap: wrap;
 
         .line_item_quantity {
           flex-grow: 1;
