@@ -1,5 +1,6 @@
-
-<% unless @cart.empty? %>
+<% if @cart.empty?%>
+  <p>Cart is empty</p>
+<% else %>
   <h2>Your Cart</h2>
 
   <div class="line_item_display">
@@ -12,9 +13,9 @@
   </div>
 
   <%= button_to 'Empty Cart', @cart, method: :delete, data: {confirm: 'Are you sure?'}, remote: true%>  
+
 <% end %>
 
 
 <%# link_to 'Edit', edit_cart_path(@cart) %>
 <%# link_to 'Store', store_index_path %>
-
