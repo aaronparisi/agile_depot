@@ -1,15 +1,19 @@
-<h2>Your Cart</h2>
 
-<div class="line_item_display">
-  <%= render(@cart.line_items) %>
-</div>
+<% unless @cart.empty? %>
+  <h2>Your Cart</h2>
 
-<div class="total_row">
-  <div class="total_label">Total</div>
-  <div class="total_val"><%= number_to_currency(@cart.total_price) %></div>
-</div>
+  <div class="line_item_display">
+    <%= render(@cart.line_items) %>
+  </div>
 
-<%= button_to 'Empty Cart', @cart, method: :delete, data: {confirm: 'Are you sure?'}%>
+  <div class="total_row">
+    <div class="total_label">Total</div>
+    <div class="total_val"><%= number_to_currency(@cart.total_price) %></div>
+  </div>
+
+  <%= button_to 'Empty Cart', @cart, method: :delete, data: {confirm: 'Are you sure?'}, remote: true%>  
+<% end %>
+
 
 <%# link_to 'Edit', edit_cart_path(@cart) %>
 <%# link_to 'Store', store_index_path %>
