@@ -76,29 +76,44 @@
     #cart {
       font-size: smaller;
       color: white;
+      display: flex;
+      flex-wrap: wrap;
 
-      .line_item_display {
+      .break {
+        flex-basis: 100%;
+        height: 0px;
+      }
+
+      .single_line_item {
+        flex-basis: 100%;
         display: flex;
-        justify-content: flex-end;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
 
         .line_item_quantity {
-          flex-grow: 1;
+          flex-shrink: 0;
         }
 
         .line_item_title {
-          flex-grow: 2;
+          
           border: 5px solid black;
         }
 
         .line_item_price {
-          flex-grow: 1;
+          margin-right: 10px;
         }
 
         .line_item_destroy_button {
           
-          flex-grow: 1;
         }
+      }
+
+      .total_row {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .empty_cart_button {
+        align-self: right;
       }
     }
 
