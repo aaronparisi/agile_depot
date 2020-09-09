@@ -1,1 +1,1 @@
-$(`#li_for_prod_${@line_item.product_id}`).html("<%= j render(@line_item) %>");
+$(`#li_for_prod_${<%= @line_item.product_id %>}`).html("<%= j render(@line_item) %>");
