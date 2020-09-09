@@ -1,4 +1,5 @@
-<div class="single_line_item">
+<div class="single_line_item" id=<%= "li_for_prod_#{line_item.product_id}" %>>
+  <% logger.debug "inside line item div w quantity #{line_item.quantity}"%>
   <div class="line_item_quantity">
     <%= line_item.quantity %> &times
   </div>
