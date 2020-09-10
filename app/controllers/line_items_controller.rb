@@ -33,10 +33,11 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       if @line_item.save
         set_cart
-        logger.debug "@line_item saved, quantity = #{@line_item.quantity}"
+        # todo single line item re render depends on finding matching line item id
+        # todo which won't exist the first time...
         session[:visit_count] = 0
         format.html { redirect_to store_index_url }
-        format.js
+        format.js { @current_item = @line_item }
         format.json { render :show, status: :created, location: @line_item }
       else
         format.html { render :new }
