@@ -32,7 +32,7 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.save
-        #set_cart
+        set_cart
         logger.debug "@line_item saved, quantity = #{@line_item.quantity}"
         session[:visit_count] = 0
         format.html { redirect_to store_index_url }

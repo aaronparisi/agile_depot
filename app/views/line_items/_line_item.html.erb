@@ -1,5 +1,5 @@
 <div class="single_line_item" id=<%= "li_for_prod_#{line_item.product_id}" %>>
-  <% logger.debug "inside line item div w quantity #{line_item.quantity}"%>
+
   <div class="line_item_quantity">
     <%= line_item.quantity %> &times
   </div>
@@ -16,4 +16,5 @@
     <%# link_to raw('<i class="icon-trash icon-white"></i>'), line_item, method: :delete, data: {confirm: "Remove \'#{line_item.product.title}' from cart?"}, :class => 'btn btn-danger' %>
     <%= button_to "Del", line_item, method: :delete, data: {confirm: "Remove \'#{line_item.product.title}' from cart?"}, remote: true %>
   </div>
+  
 </div>
