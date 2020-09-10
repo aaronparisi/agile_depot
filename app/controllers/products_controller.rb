@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  include CurrentCart
+  before_action :set_cart
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
@@ -44,6 +46,9 @@ class ProductsController < ApplicationController
       if @product.update(product_params)
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
+
+        @products = Product.all
+        ActionCable.server.broadcast 'products', html: render_to_string('store/index', layout: false)
       else
         format.html { render :edit }
         format.json { render json: @product.errors, status: :unprocessable_entity }

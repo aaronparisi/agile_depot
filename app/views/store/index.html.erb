@@ -27,7 +27,7 @@ products change%>
 
 <%= button_to 'Show Cart', @cart, method: :get %>
 
-<% if @visit_count > 5 %>
+<% if @visit_count && @visit_count > 5 %>
   <p id="visit_count">You have visited this page <%= pluralize(@visit_count, "time") %></p>
 <% end %>
 
