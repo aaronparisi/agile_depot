@@ -1,6 +1,6 @@
 $('#cart').css({ 'display' : '' });
 
-if ($('div.single_line_item').length == 1) { $('#cart').show('blind', 1000); }
+if ($('div.single_line_item').length == 0) { $('#cart').show('blind', 5000); }
 
 $('#cart').html("<%= j render(@cart) %>");
 

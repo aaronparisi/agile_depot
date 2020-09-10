@@ -62,7 +62,7 @@
     // color: white;
 
     form, div {
-      
+      display: inline;
     }
 
     #time_display {
@@ -76,8 +76,8 @@
     #cart {
       font-size: smaller;
       color: white;
-      display: flex;
-      flex-wrap: wrap;
+      // display: flex;
+      // flex-wrap: wrap;
 
       .break {
         flex-basis: 100%;
