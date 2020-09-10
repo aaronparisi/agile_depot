@@ -38,6 +38,18 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     # and then check to make sure the page rendered has the expected content
   end
 
+  test "should create line_item via ajax" do
+    assert_difference('LineItem.count') do
+      post line_items_url, params: { product_id: products(:lotr).id }, xhr: true
+    end
+
+    assert_response :success
+    assert_select_jquery :html, '#cart' do
+      assert_select 'div#current_item .line_item_title', 'Lord of the Rings, The Two Towers' 
+      # we're testing whether or not the current line item had its id updated
+    end
+  end
+
   test "should show line_item" do
     get line_item_url(@line_item)
     assert_response :success
