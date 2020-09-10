@@ -1,1 +1,3 @@
-$('#cart').html("<%= j render(@cart) %>")
+if ($('div.single_line_item').length == 1) { $('#cart').css({ 'display' : 'none' }); }
+
+$('#cart').html("<%= j render(@cart) %>");
