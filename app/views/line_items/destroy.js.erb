@@ -1,5 +1,3 @@
-$('#cart').hide('blind', 5000);
-
 if ($('div.single_line_item').length == 1) { $('#cart').css({ 'display' : 'none' }); }
 
 $('#cart').html("<%= j render(@cart) %>");

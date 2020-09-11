@@ -10,16 +10,12 @@ class Cart < ApplicationRecord
   has_many :line_items, dependent: :destroy
   has_many :products, through: :line_items
 
-  def add_product(product_id)
-    # NOTE: self (a cart instance) is not set by CartController#set_cart
-    # it is set by CurrentCart's set_cart method,
-    # which is included in line_item's controller
-    # and called before LineItemsController's create method
-    # IF no product has been added, or IF the cart has been emptied,
-    # CurrentCart's set_cart method will CREATE a new cart_id in the session
+  def add_product(product_id, dir)
+    logger.debug "inside add product with dir = #{dir}"
+
     current_item = line_items.find_by(product_id: product_id)
     if current_item
-      current_item.quantity += 1
+      dir == "inc" ? current_item.quantity += 1 : current_item.quantity -= 1
     else
       price = Product.find(product_id).price
       current_item = line_items.build(product_id: product_id, product_price: price)

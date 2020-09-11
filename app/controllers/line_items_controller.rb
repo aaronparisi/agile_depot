@@ -26,15 +26,13 @@ class LineItemsController < ApplicationController
   # POST /line_items
   # POST /line_items.json
   def create
-    @line_item = @cart.add_product(params[:product_id])
+    @line_item = @cart.add_product(params[:product_id], params[:dir])
     # notice that we are calling a method on a Cart instance
     # and @cart is derived from the session
 
     respond_to do |format|
       if @line_item.save
         set_cart
-        # todo single line item re render depends on finding matching line item id
-        # todo which won't exist the first time...
         session[:visit_count] = 0
         format.html { redirect_to store_index_url }
         format.js { @current_item = @line_item }
