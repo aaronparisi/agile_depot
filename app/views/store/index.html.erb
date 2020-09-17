@@ -12,7 +12,11 @@ products change%>
     as we are re-rendering the entire group of products, we will check if each product,
     displayed according to what is within this sub do...end, needs to be re-rendered
     itself, or if it can be simply grabbed from the cache%>
-      <div class="entry">
+      <% if true %>
+        <div class="entry">
+      <% else %>
+        <div class="entry">
+      <% end%>
         <%= link_to image_tag(product.image_url), line_items_path(product_id: product.id, dir: :inc), method: :post, remote: true %>
         <h3><%= product.title %></h3>
         <%= sanitize(product.description) %>
