@@ -22,6 +22,7 @@ class OrdersController < ApplicationController
     @order = Order.new
     #@payTypes = PayType.all
     respond_to do |format|
+      format.html { redirect_to store_index_path}
       format.js
     end
   end
