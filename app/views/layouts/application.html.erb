@@ -39,8 +39,10 @@
         <% end%>
 
       </div>
-      
+
       <div id="main">
+        <div id="notice" style="display:none">
+        </div>
         <%= yield %>
       </div>
 
@@ -48,3 +50,7 @@
     
   </body>
 </html>
+
+        <%# hidden_div_if(notice.present?, id: 'notice') do %>
+          <%# "#{notice}" %>
+        <%# end %>

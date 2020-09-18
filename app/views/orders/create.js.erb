@@ -1,0 +1,7 @@
+$('#cart').html("<%= j render(@cart) %>");
+$(':submit').prop('disabled', false);
+
+$('#main').html("<%= j render(@products) %>");
+
+$('#notice').css({ 'display' : '' });
+$('#notice').html(<%= j render 'shared/notice_banner' %>)
