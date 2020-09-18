@@ -11,5 +11,10 @@ class StoreController < ApplicationController
       session[:visit_count] += 1
     end
     @visit_count = session[:visit_count]
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 end

@@ -20,6 +20,9 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /orders/1/edit
