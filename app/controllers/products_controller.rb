@@ -71,6 +71,7 @@ class ProductsController < ApplicationController
 
     if stale?(@latest_order)
       respond_to do |format|
+        format.html # { redirect_to who_bought_product_path(@product) }
         format.atom
       end
     end
