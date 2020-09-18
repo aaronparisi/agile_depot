@@ -1,7 +1,9 @@
-$('#cart').html("<%= j render(@cart) %>");
 $(':submit').prop('disabled', false);
+$('#cart').hide('blind', 5000);
+$('#cart').css({ 'display' : 'none' });
+$('#cart').html("<%= j render(@cart) %>");
 
-$('#main').html("<%= j render(@products) %>");
+$('#main_content').html("<%= j render(@products) %>");
 
 $('#notice').css({ 'display' : '' });
-$('#notice').html(<%= j render 'shared/notice_banner' %>)
+$('#notice').html(<%= j render 'shared/notice_banner' %>);
