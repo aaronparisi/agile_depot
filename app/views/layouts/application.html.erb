@@ -20,8 +20,9 @@
 
     <div id="columns">
 
-      <%# hidden_div_if(controller.controller_name == "products", id: 'side') %>
-      <div id="side">
+      <%= hidden_div_if(controller.controller_name == "products", id: 'side') do %>
+      <%# <div id="side"> %>
+      <% logger.debug("controller.controller_name = #{controller.controller_name}")%>
         <% t = Time.now %>
         <div id="time_display">
           <%= t.strftime("Today is %A, %B %d, %Y") %><br>
@@ -36,9 +37,9 @@
 
         <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
           <%= render @cart %>
-        <% end%>
+        <% end %>
 
-      </div>
+      <% end  %>
       
       <div id="main">
         <%= yield %>
