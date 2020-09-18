@@ -20,6 +20,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    #@payTypes = PayType.all
     respond_to do |format|
       format.js
     end
@@ -79,7 +80,7 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:name, :address, :email, :pay_type)
+      params.require(:order).permit(:name, :address, :email, :pay_type_id)
     end
 
     def ensure_cart_not_empty

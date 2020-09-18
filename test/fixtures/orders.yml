@@ -2,13 +2,17 @@
 #
 # Table name: orders
 #
-#  id         :integer          not null, primary key
-#  address    :text
-#  email      :string
-#  name       :string
-#  pay_type   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  address     :text
+#  email       :string
+#  name        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  pay_type_id :integer
+#
+# Indexes
+#
+#  index_orders_on_pay_type_id  (pay_type_id)
 #
 
 one:
