@@ -29,7 +29,7 @@
   <div class="field">
     <%= form.label :pay_type %>
     <%# form.select :pay_type, order.pay_type.collect {|k, v| [k, v]} %>
-    <%= form.select :pay_type, order.pay_type.keys, prompt: "Select a payment method" %>
+    <%= form.select :pay_type, Order.pay_types.keys, prompt: "Select a payment method" %>
   </div>
 
   <div class="actions">

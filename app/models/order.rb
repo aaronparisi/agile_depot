@@ -11,13 +11,16 @@
 #  updated_at :datetime         not null
 #
 class Order < ApplicationRecord
-  enum pay_type: {
+  enum pay_types: {
     "Check":          0,
     "Credit Card":    1,
     "Purchase Order": 2
   }
   # "the pay_type column in the orders table is of type integer;
   # this associates those integers with the given strings"
+
+  validates :name, :address, :email, presence: true
+  validates :pay_type, inclusion: pay_types.keys
 
   # ? how come we don't have any relations, like has_many :line_items ????
 end
