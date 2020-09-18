@@ -1,3 +1,3 @@
-$('#main').html("<%= j render(@order) %>");
+$(':submit').prop('disabled', true);
 
-$('.cart_button').disabled=true;
+$('#main').html("<%= j render(@order) %>");
