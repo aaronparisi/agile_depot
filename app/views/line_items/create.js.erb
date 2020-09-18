@@ -5,3 +5,5 @@ if ($('div.single_line_item').length == 0) { $('#cart').show('blind', 5000); }
 $('#cart').html("<%= j render(@cart) %>");
 
 $('#current_item').css({'background-color' : '#88ff88'}).animate({'background-color' : '#114411'}, 1000);
+
+$('#notice').css({ 'display' : 'none' });

@@ -34,10 +34,12 @@ class OrderTest < ActiveSupport::TestCase
       email:   "parisi.aaron@gmail.com"
     )
 
-    # order.pay_type = "feces"
-    # assert order.invalid?
-    # assert order.errors[:pay_type].any?
+    order.pay_type = "feces"
+    assert order.invalid?
+    assert_equal ["'feces' is not a valid pay_type"], order.errors[:pay_type]
     # ArgumentError: 'feces' is not a valid pay_type => um, I know, that's the point?????
+    # notice that when we tested the product model,
+    # we were entering numerically valid input
 
     order.pay_type = "Check"
     # why is pay type 0 instead of "Check"????????????
