@@ -22,6 +22,7 @@ class Product < ApplicationRecord
 
   has_many :line_items
   has_many :carts, through: :line_items
+  has_many :orders, through: :line_items
 
   before_destroy :ensure_not_ref_by_line_items
 

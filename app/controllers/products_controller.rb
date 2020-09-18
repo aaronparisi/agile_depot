@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   include CurrentCart
   before_action :set_cart
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :who_bought]
 
   # GET /products
   # GET /products.json
@@ -65,6 +65,17 @@ class ProductsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def who_bought
+    @latest_order = @product.orders.order(:updated_at).last
+
+    if stale?(@latest_order)
+      respond_to do |format|
+        format.atom
+      end
+    end
+  end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
