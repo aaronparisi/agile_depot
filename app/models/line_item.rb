@@ -18,8 +18,9 @@
 #  index_line_items_on_product_id  (product_id)
 #
 class LineItem < ApplicationRecord
-  belongs_to :product
+  belongs_to :product, optional: true   # why tf would they make this optional
   belongs_to :cart
+  belongs_to :order, optional: true
 
   def total_price
     self.quantity * self.product.price
