@@ -40,6 +40,7 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save
         @products = Product.all
+        set_cart
         Cart.destroy(session[:cart_id])  # we are NOT issuing a destory request to carts_path....
         format.html { redirect_to store_index_url, notice: 'Thank you for your order.' }
         format.js { flash.now[:notice] = 'Thank you for your order.' }
