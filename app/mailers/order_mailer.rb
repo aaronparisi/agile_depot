@@ -11,7 +11,7 @@ class OrderMailer < ApplicationMailer
     @order = order
     @greeting = "Dear #{@order.name}"
 
-    mail to: order.email, subject: 'Depot Order Confirmation'
+    mail to: order.email, subject: 'Thank you for your order!'
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -19,7 +19,8 @@ class OrderMailer < ApplicationMailer
   #
   #   en.order_mailer.shipped.subject
   #
-  def shipped
+  def shipped(order)
+    @order = order
     @greeting = "Dear #{@order.name}"
 
     mail to: order.email, subject: 'Your Depot order has shipped!'
