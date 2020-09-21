@@ -1,5 +1,8 @@
 $('#notice').html("<%= j render partial: 'shared/notice_banner' %>");
 
+var className = $('body').attr('class');
+$('body').removeClass(`${className}`);
+$('body').addClass("store");
 $('#main_content').html("<%= j render(@products) %>");
 
 $(':submit').prop('disabled', false);
