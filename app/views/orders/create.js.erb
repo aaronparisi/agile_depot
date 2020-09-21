@@ -3,6 +3,9 @@ $(':submit').prop('disabled', false);
 $('#cart').css({ 'display' : 'none' });
 $('#cart').html("<%= j render(@cart) %>");
 
+var className = $('body').attr('class');
+$('body').removeClass(`${className}`);
+$('body').addClass("store");
 $('#main_content').html("<%= j render(@products) %>");
 
 $('#notice').css({ 'display' : '' });

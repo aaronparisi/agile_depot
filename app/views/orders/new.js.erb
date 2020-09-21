@@ -1,3 +1,6 @@
 $(':submit').prop('disabled', true);
 
+var className = $('body').attr('class');
+$('body').removeClass(`${className}`);
+$('body').addClass("orders");
 $('#main_content').html("<%= j render(@order) %>");
