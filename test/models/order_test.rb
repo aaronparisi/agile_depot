@@ -6,6 +6,7 @@
 #  address     :text
 #  email       :string
 #  name        :string
+#  ship_date   :date
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  pay_type_id :integer

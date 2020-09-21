@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Ship Date</th>
       <th>Name</th>
       <th>Address</th>
       <th>Email</th>
@@ -16,6 +17,13 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
+        
+        <% if order.ship_date %>
+          <td><%= order.ship_date %></td>
+        <% else %>
+          <td><%= button_to 'Ship it!', ship_order_path(id: order.id), method: :get, remote: true%></td>
+        <% end %>
+        
         <td><%= order.name %></td>
         <td><%= order.address %></td>
         <td><%= order.email %></td>

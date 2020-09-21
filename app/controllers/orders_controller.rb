@@ -2,9 +2,9 @@ require 'byebug'
 
 class OrdersController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:new, :create]
+  before_action :set_cart, only: [:new, :create, :index]
   before_action :ensure_cart_not_empty, only: :new
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :ship]
 
   # GET /orders
   # GET /orders.json
@@ -77,6 +77,22 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def ship
+    # add date to ship_date column
+    @order.ship_date = Date.today
+
+    # send shipped e mail
+    if @order.save
+      OrderMailer.shipped(@order).deliver_later
+      respond_to do |format|
+        @products = Product.all
+        format.js
+      end      
+    end
+
+  end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
