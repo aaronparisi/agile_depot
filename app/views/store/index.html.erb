@@ -18,8 +18,8 @@ products change%>
         <%= sanitize(product.description) %>
         <div class="price_line">
           <span class="price"><%= number_to_currency product.price, unit: "R$" %></span>
-          <%# button_to 'Add To Cart', line_items_path(product_id: product.id, dir: :inc), remote: true %>
-          <%= button_to 'Add To Cart', line_items_path(product_id: product.eye_dee, dir: :inc), remote: true %>
+          <%= button_to 'Add To Cart', line_items_path(product_id: product.id, dir: :inc), remote: true %>
+          <%# button_to 'Add To Cart', line_items_path(product_id: product.eye_dee, dir: :inc), remote: true %>
           <%= button_to 'Who Bought', who_bought_product_path(id: product.id), method: :get %>
         </div>
       </div>
