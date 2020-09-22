@@ -21,7 +21,7 @@
         <% if order.ship_date %>
           <td><%= order.ship_date %></td>
         <% else %>
-          <td><%= button_to 'Ship it!', ship_order_path(id: order.id), method: :get, remote: true%></td>
+          <td><%= button_to 'Ship it!', ship_order_path(id: order.id), method: :get %></td>
         <% end %>
         
         <td><%= order.name %></td>
@@ -35,6 +35,7 @@
 </table>
 
 <br>
+<%= link_to 'Admin Home', admin_index_url %> | 
 <%= link_to 'Store Home', store_index_url, remote: true %>
 
 <%# link_to 'New Order', new_order_path %>

@@ -2,7 +2,7 @@ require 'byebug'
 
 class OrdersController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:new, :create, :index]
+  before_action :set_cart, only: [:new, :create]
   before_action :ensure_cart_not_empty, only: :new
   before_action :set_order, only: [:show, :edit, :update, :destroy, :ship]
 
@@ -87,7 +87,7 @@ class OrdersController < ApplicationController
       OrderMailer.shipped(@order).deliver_later
       respond_to do |format|
         @products = Product.all
-        format.js
+        format.html { redirect_to admin_index_path, notice: "order successfully shipped" }
       end      
     end
 

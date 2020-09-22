@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  # resources :sessions do
+  #   only: [:new, :create, :destroy]
+  # end
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
+  resources :admin, only: :index
   resources :users
   resources :orders do
     get :ship, on: :member

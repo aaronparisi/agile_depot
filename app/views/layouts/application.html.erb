@@ -34,8 +34,8 @@
           <li><a href="http://www....">Contact</a></li>
         </ul>
 
-        <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
-          <%= render @cart %>
+        <%= hidden_div_if((@cart.nil? || @cart.line_items.empty?), id: 'cart') do %>
+          <%= render @cart if @cart %>
         <% end%>
 
       </div>
