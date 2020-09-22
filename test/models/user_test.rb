@@ -17,7 +17,7 @@ class UserTest < ActiveSupport::TestCase
   # end
 
   test "user should have name" do
-    aUser = User.new(password_digest: "stuff")
+    aUser = User.new(password_digest: BCrypt::Password.create('stuff'))
     assert aUser.invalid?
 
     aUser.name = "Bob"
@@ -25,7 +25,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "user name should be unique" do
-    dupUser = User.new(name: users(:one).name, password_digest: "moreStuff")
+    dupUser = User.new(name: users(:one).name, password_digest: BCrypt::Password.create('more stuff'))
     assert dupUser.invalid?
 
     dupUser.name = "Chris"
