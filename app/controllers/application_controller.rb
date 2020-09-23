@@ -17,21 +17,39 @@ class ApplicationController < ActionController::Base
   protected
 
   def authorize
-    unless exception?
-      unless User.find_by(id: session[:user_id])
-        redirect_to login_url, notice: "You must be logged in to access admin pages"
+    case request.format
+    when Mime[:html]
+      do_auth unless no_auth?
+    else
+      authenticate_or_request_with_http_basic do |username, password|
+        # username == "fred" && password == "word"
+        aUser = User.find_by(name: username)
+        if aUser.try(:authenticate, password)
+          true
+        else
+          redirect_to login_url, notice: "Bad boy"
+        end
       end
     end
   end
+  
 
   private
-  
-  def exception?
-    AUTHORIZE_CONTROLLER_EXCEPTIONS.include?(params[:controller]) ||
-    (params[:controller] == "users" && params[:action] == "new") ||
-    (params[:controller] == "users" && params[:action] == "create")
 
+  def do_auth
+    redirect_to login_url, notice: "You must be logged in to access admin pages"
   end
   
+  def no_auth?
+    AUTHORIZE_CONTROLLER_EXCEPTIONS.include?(params[:controller]) ||
+    (params[:controller] == "users" && params[:action] == "new") ||
+    (params[:controller] == "users" && params[:action] == "create") ||
+    logged_in_already?
+  end
+
+  def logged_in_already?
+    # debugger
+    User.find_by(id: session[:user_id])
+  end
 
 end
