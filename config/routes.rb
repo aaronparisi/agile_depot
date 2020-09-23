@@ -14,6 +14,10 @@ Rails.application.routes.draw do
       post 'send_password_reset_email', to: "users#send_password_reset_email"
       get 'check_email', to: "users#check_email"
     end
+    member do
+      get 'recover_password', to: 'users#recover_password'
+      post 'update_password', to: 'users#update_password'
+    end
   end
   resources :orders do
     get :ship, on: :member

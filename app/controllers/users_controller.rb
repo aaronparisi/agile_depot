@@ -3,7 +3,7 @@ require 'byebug'
 class UsersController < ApplicationController
   include CurrentCart #paste the module code in this class
   before_action :set_cart
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :update_password, :recover_password]
 
   # GET /users
   # GET /users.json
@@ -83,8 +83,19 @@ class UsersController < ApplicationController
   def check_email
     
   end
+
+  def recover_password
+    
+  end
   
-  
+  def update_password
+    @user.password_digest = BCrypt::Password.create(params[:password])
+    if @user.save
+      redirect_to login_path, notice: "Password Successfully Updated"
+    else
+      redirect_to login_path, notice: "Password Did NOT reset, idk why"
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

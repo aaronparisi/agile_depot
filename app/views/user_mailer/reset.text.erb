@@ -1,1 +1,5 @@
-here is text
+Dear <%= @user.name %>
+
+Here is your e mail to reset your password.  Go to this link to do so:
+
+http://www.localhost:3000/users/<%= @user.id %>/reset_password
