@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     post 'login' => :create
     delete 'logout' => :destroy
   end
+
   resources :admin, only: :index
+  
   resources :users do
     collection do
       get 'forgot_password', to: "users#forgot_password", as: "forgot_password"
@@ -17,16 +19,22 @@ Rails.application.routes.draw do
     member do
       get 'recover_password', to: 'users#recover_password'
       post 'update_password', to: 'users#update_password'
+      get 'update_info', to: 'users#password_confirmation'
+      post 'update_info', to: 'users#confirm_password'
     end
   end
+  
   resources :orders do
     get :ship, on: :member
   end
+  
   resources :line_items
+  
   resources :carts #do
   #   delete :empty, on: :member
   # end
   # get 'store/index' replaced by root
+  
   resources :products do
     get :who_bought, on: :member
   end

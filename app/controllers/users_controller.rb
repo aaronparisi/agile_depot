@@ -3,7 +3,16 @@ require 'byebug'
 class UsersController < ApplicationController
   include CurrentCart #paste the module code in this class
   before_action :set_cart
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :update_password, :recover_password]
+  before_action :set_user, only: [
+    :show, 
+    :edit, 
+    :update, 
+    :destroy, 
+    :update_password, 
+    :recover_password, 
+    :password_confirmation,
+    :confirm_password
+  ]
 
   # GET /users
   # GET /users.json
@@ -21,6 +30,20 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def password_confirmation
+    
+  end
+
+  def confirm_password
+    # if @user.password_digest == BCrypt::Password.create(params[:user][:password])
+    if @user.try(:authenticate, params[:user][:password])
+      redirect_to edit_user_path(@user)
+    else
+      redirect_to users_path, notice: "Looks like that's not the right password for #{@user.name}"
+    end
+  end
+  
+  
   # GET /users/1/edit
   def edit
   end
