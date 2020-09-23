@@ -6,8 +6,11 @@ class AdminController < ApplicationController
     if sesh_id
       @adminUser = User.find(session[:user_id])
     else
-      redirect_to new_session_path
+      redirect_to login_url, notice: "You must be logged in to access admin pages"
     end
-  end
+  end  
   
 end
+
+
+# why does the cart render when i load this view????????????

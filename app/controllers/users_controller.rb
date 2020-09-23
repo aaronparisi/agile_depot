@@ -1,3 +1,5 @@
+require 'byebug'
+
 class UsersController < ApplicationController
   include CurrentCart #paste the module code in this class
   before_action :set_cart
@@ -30,7 +32,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to new_session_url, notice: "User '#{@user.name}' was successfully created." }
+        format.html { redirect_to login_url, notice: "User '#{@user.name}' was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -63,6 +65,27 @@ class UsersController < ApplicationController
     end
   end
 
+  def forgot_password
+    @user = User.new
+  end
+  
+  def send_password_reset_email
+    @user = User.where(name: params[:user][:name], email: params[:user][:email]).first
+    
+    if @user
+      UserMailer.reset(@user).deliver_later
+      redirect_to check_email_users_path
+    else
+      redirect_to forgot_password_users_path, notice: "Invalid User/Email"
+    end
+  end
+  
+  def check_email
+    
+  end
+  
+  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -71,6 +94,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 end

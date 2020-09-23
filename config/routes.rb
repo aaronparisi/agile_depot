@@ -8,7 +8,13 @@ Rails.application.routes.draw do
     delete 'logout' => :destroy
   end
   resources :admin, only: :index
-  resources :users
+  resources :users do
+    collection do
+      get 'forgot_password', to: "users#forgot_password", as: "forgot_password"
+      post 'send_password_reset_email', to: "users#send_password_reset_email"
+      get 'check_email', to: "users#check_email"
+    end
+  end
   resources :orders do
     get :ship, on: :member
   end

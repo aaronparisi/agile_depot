@@ -1,6 +1,6 @@
 <div class="depot_form">
   
-  <% if flash[:alert] %>
+  <% if flash[:notice] %>
     <p id="notice"><%= flash[:notice] %></p>
   <% end %>
 
@@ -24,6 +24,7 @@
     </fieldset>
   <% end %>
 
+  <%= link_to 'Forgot Password?', forgot_password_users_path %>
   <%= link_to 'Add Admin', new_user_url %>
   
 </div>
