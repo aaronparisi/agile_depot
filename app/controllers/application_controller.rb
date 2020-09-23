@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 # rescue_from StandardError, with: :email_admin
 
   before_action :authorize
-  AUTHORIZE_CONTROLLER_EXCEPTIONS = ['store', 'carts', 'line_items']
+  AUTHORIZE_CONTROLLER_EXCEPTIONS = ['store', 'carts', 'line_items', 'sessions']
 
 # private
 

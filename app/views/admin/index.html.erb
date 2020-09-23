@@ -3,6 +3,3 @@
 <p>It's <%= Time.now %></p>
 <p>We have <%= pluralize(@order_count, "order") %>.</p>
 <p>Shipment pending on <%= pluralize(@unshipped, "order") %>.</p>
-
-<%= link_to 'Orders', orders_path %> | 
-<%= link_to 'Log Out', logout_path, method: :delete, data: { confirm: "Are you sure?" } %>
