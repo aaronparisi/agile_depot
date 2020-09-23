@@ -17,11 +17,21 @@ class ApplicationController < ActionController::Base
   protected
 
   def authorize
-    unless AUTHORIZE_CONTROLLER_EXCEPTIONS.include?(params[:controller])
+    unless exception?
       unless User.find_by(id: session[:user_id])
         redirect_to login_url, notice: "You must be logged in to access admin pages"
       end
     end
   end
+
+  private
+  
+  def exception?
+    AUTHORIZE_CONTROLLER_EXCEPTIONS.include?(params[:controller]) ||
+    (params[:controller] == "users" && params[:action] == "new") ||
+    (params[:controller] == "users" && params[:action] == "create")
+
+  end
+  
 
 end
