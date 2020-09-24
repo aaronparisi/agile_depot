@@ -21,13 +21,20 @@ class ApplicationController < ActionController::Base
     when Mime[:html]
       do_auth unless no_auth?
     else
+      if session[:user_id]
+        # why the fuck is user_id getting set to 5?????????
+        @current_user = User.find(session[:user_id])
+      else
+        redirect_to login_path, notice: "you gotta be logged in first" and return
+      end
+
       authenticate_or_request_with_http_basic do |username, password|
-        # username == "fred" && password == "word"
+        # username == @current_user.name # && password == @current_user.password_digest
         aUser = User.find_by(name: username)
         if aUser.try(:authenticate, password)
           true
         else
-          redirect_to login_url, notice: "Bad boy"
+          redirect_to login_url, notice: "Invalid username/password combo"
         end
       end
     end
